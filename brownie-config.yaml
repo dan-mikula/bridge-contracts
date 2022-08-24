@@ -6,7 +6,7 @@ compiler:
       - "@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.5.0"
 dotenv: .env
 settings:
-  gas_limit: "100000000000"
+  gas_limit: "1000000"
 wallets:
   from_key_presenter_1: ${PRIVATE_KEY_PRESENTER_1}
   from_key_presenter_2: ${PRIVATE_KEY_PRESENTER_2}
