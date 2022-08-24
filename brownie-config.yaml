@@ -8,8 +8,6 @@ dotenv: .env
 settings:
   gas_limit: "100000000000"
 wallets:
-  from_key: ${PRIVATE_KEY}
-  from_key_2: ${PRIVATE_KEY_2}
   from_key_presenter_1: ${PRIVATE_KEY_PRESENTER_1}
   from_key_presenter_2: ${PRIVATE_KEY_PRESENTER_2}
   from_key_presenter_3: ${PRIVATE_KEY_PRESENTER_3}
