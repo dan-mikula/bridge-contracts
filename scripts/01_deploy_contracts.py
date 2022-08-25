@@ -94,8 +94,8 @@ def mint_token_main():
     spender_account = accounts.add(config["wallets"]["from_key_presenter_3"])
 
     erc20 = Contract.from_abi(USDC._name, USDC[-1].address, USDC.abi)
-    erc20.mint(owner_account, 100000 * 10 ** 6, {"from": owner_account})
-    erc20.transfer(spender_account.address, 10000 * 10 ** 6, {"from": owner_account})
+    erc20.mint(owner_account, 100000 * 10**6, {"from": owner_account})
+    erc20.transfer(spender_account.address, 10000 * 10**6, {"from": owner_account})
     print(
         f"{spender_account.address} balance: {erc20.balanceOf(spender_account.address)/10**6} USDC"
     )
@@ -107,7 +107,7 @@ def mint_token_main():
 def transfer_to_main_bridge():
     spender_account = accounts.add(config["wallets"]["from_key_presenter_3"])
 
-    amount_to_bridge = 152 * 10 ** 6
+    amount_to_bridge = 30 * 10**6
 
     erc20 = Contract.from_abi(USDC._name, USDC[-1].address, USDC.abi)
     token_transfer = erc20.transfer(
@@ -116,7 +116,6 @@ def transfer_to_main_bridge():
         {"from": spender_account},
     )
     token_transfer.wait(1)
-    print(token_transfer.txid)
     main_bridge = Contract.from_abi(
         MainChainBridge._name,
         MainChainBridge[-1].address,
@@ -142,7 +141,7 @@ def transfer_to_main_bridge():
 def return_token_on_side_chain():
     spender_account = accounts.add(config["wallets"]["from_key_presenter_3"])
 
-    amount_to_bridge = 92 * 10 ** 6
+    amount_to_bridge = 118 * 10**6
 
     erc20 = Contract.from_abi(USDC_BRIDGED._name, USDC_BRIDGED[-1], USDC_BRIDGED.abi)
 
@@ -166,7 +165,7 @@ def return_token_on_side_chain():
         USDC_BRIDGED[-1].address,
         amount_to_bridge,
         txid,
-        42,
+        5,
         {
             "from": spender_account,
             "gasPrice": Web3.toWei(10, "gwei"),
@@ -218,7 +217,7 @@ def interact():
 def main():
     show_info()
 
-    interact()
+    # interact()
 
     if network.show_active() == "goerli":
         # deploy contracts on mainnet

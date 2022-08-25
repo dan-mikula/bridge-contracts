@@ -1,7 +1,6 @@
 # Token Bridge Demo
 
 This token bridge demo is built with the Brownie framework.
-Do not use in production.
 
 ### Installation
 ```
