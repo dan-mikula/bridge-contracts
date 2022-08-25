@@ -4,9 +4,9 @@ This token bridge demo is built with the Brownie framework.
 Do not use in production.
 
 ### Installation
-'''
+```
 pip install eth-brownie
-'''
+```
 
 ### Usage
 Rename .envexample to .env and set up your private keys and paths.
