@@ -6,12 +6,12 @@ AMOUNT = 1000 * 10 ** 6
 
 @pytest.fixture(scope="module")
 def account():
-    return accounts.add(config["wallets"]["from_key"])
+    return accounts.add(config["wallets"]["from_key_presenter_1"])
 
 
 @pytest.fixture(scope="module")
 def gateway():
-    return accounts.add(config["wallets"]["from_key_2"])
+    return accounts.add(config["wallets"]["from_key_presenter_2"])
 
 
 @pytest.fixture(scope="module")

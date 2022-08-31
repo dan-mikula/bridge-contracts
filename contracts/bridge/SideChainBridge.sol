@@ -17,7 +17,7 @@ contract SideChainBridge {
     event BridgedTokens(
         address indexed sender,
         address indexed receiver,
-        string mainDepositHash,
+        bytes32 indexed mainDepositHash,
         uint256 sourceChain,
         uint256 amount,
         uint256 timestamp
@@ -25,7 +25,7 @@ contract SideChainBridge {
     event ReturnedTokens(
         address indexed sender,
         address indexed receiver,
-        string sideDepositHash,
+        bytes32 indexed sideDepositHash,
         uint256 targetChain,
         uint256 amount,
         uint256 timestamp
@@ -113,7 +113,7 @@ contract SideChainBridge {
         address _receiver,
         address _tokenAddress,
         uint256 _returnedAmount,
-        string memory _depositHash,
+        bytes32 _depositHash, // string memory
         uint256 _targetChain
     ) external {
         require(bridgeActive == true, "Bridge not active");
@@ -144,7 +144,7 @@ contract SideChainBridge {
         address _receiver,
         address _tokenAddress,
         uint256 _amount,
-        string memory _depositHash,
+        bytes32 _depositHash, // string memory
         uint256 _sourceChain
     ) external onlyGateway returns (address) {
         require(

@@ -18,5 +18,5 @@ Contains the deploy scripts. Edit main() to your needs.
 
 ### Todo
 - More tests
-- Deployment and interaction script code refactoring
+- Refactor bridge contracts
 

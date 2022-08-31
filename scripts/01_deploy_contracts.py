@@ -94,8 +94,8 @@ def mint_token_main():
     spender_account = accounts.add(config["wallets"]["from_key_presenter_3"])
 
     erc20 = Contract.from_abi(USDC._name, USDC[-1].address, USDC.abi)
-    erc20.mint(owner_account, 100000 * 10**6, {"from": owner_account})
-    erc20.transfer(spender_account.address, 10000 * 10**6, {"from": owner_account})
+    erc20.mint(owner_account, 100000 * 10 ** 6, {"from": owner_account})
+    erc20.transfer(spender_account.address, 10000 * 10 ** 6, {"from": owner_account})
     print(
         f"{spender_account.address} balance: {erc20.balanceOf(spender_account.address)/10**6} USDC"
     )
@@ -104,75 +104,75 @@ def mint_token_main():
     )
 
 
-def transfer_to_main_bridge():
-    spender_account = accounts.add(config["wallets"]["from_key_presenter_3"])
+# def transfer_to_main_bridge():
+#     spender_account = accounts.add(config["wallets"]["from_key_presenter_3"])
 
-    amount_to_bridge = 30 * 10**6
+#     amount_to_bridge = 30 * 10**6
 
-    erc20 = Contract.from_abi(USDC._name, USDC[-1].address, USDC.abi)
-    token_transfer = erc20.transfer(
-        MainChainBridge[-1].address,
-        amount_to_bridge,
-        {"from": spender_account},
-    )
-    token_transfer.wait(1)
-    main_bridge = Contract.from_abi(
-        MainChainBridge._name,
-        MainChainBridge[-1].address,
-        MainChainBridge.abi,
-    )
-    txid = str(token_transfer.txid).replace("0x", "")
-    bridge_transfer = main_bridge.bridgeTokens(
-        spender_account.address,
-        spender_account.address,
-        USDC[-1].address,
-        amount_to_bridge,
-        txid,
-        800001,
-        {
-            "from": spender_account,
-            "gasPrice": Web3.toWei(2, "gwei"),
-            "gasLimit": 1000000,
-        },
-    )
-    bridge_transfer.wait(1)
+#     erc20 = Contract.from_abi(USDC._name, USDC[-1].address, USDC.abi)
+#     token_transfer = erc20.transfer(
+#         MainChainBridge[-1].address,
+#         amount_to_bridge,
+#         {"from": spender_account},
+#     )
+#     token_transfer.wait(1)
+#     main_bridge = Contract.from_abi(
+#         MainChainBridge._name,
+#         MainChainBridge[-1].address,
+#         MainChainBridge.abi,
+#     )
+#     txid = str(token_transfer.txid).replace("0x", "")
+#     bridge_transfer = main_bridge.bridgeTokens(
+#         spender_account.address,
+#         spender_account.address,
+#         USDC[-1].address,
+#         amount_to_bridge,
+#         txid,
+#         800001,
+#         {
+#             "from": spender_account,
+#             "gasPrice": Web3.toWei(2, "gwei"),
+#             "gasLimit": 1000000,
+#         },
+#     )
+#     bridge_transfer.wait(1)
 
 
-def return_token_on_side_chain():
-    spender_account = accounts.add(config["wallets"]["from_key_presenter_3"])
+# def return_token_on_side_chain():
+#     spender_account = accounts.add(config["wallets"]["from_key_presenter_3"])
 
-    amount_to_bridge = 118 * 10**6
+#     amount_to_bridge = 118 * 10**6
 
-    erc20 = Contract.from_abi(USDC_BRIDGED._name, USDC_BRIDGED[-1], USDC_BRIDGED.abi)
+#     erc20 = Contract.from_abi(USDC_BRIDGED._name, USDC_BRIDGED[-1], USDC_BRIDGED.abi)
 
-    token_transfer = erc20.transfer(
-        SideChainBridge[-1].address,
-        amount_to_bridge,
-        {"from": spender_account},
-    )
-    token_transfer.wait(1)
-    print(token_transfer.txid)
+#     token_transfer = erc20.transfer(
+#         SideChainBridge[-1].address,
+#         amount_to_bridge,
+#         {"from": spender_account},
+#     )
+#     token_transfer.wait(1)
+#     print(token_transfer.txid)
 
-    side_bridge = Contract.from_abi(
-        SideChainBridge._name,
-        SideChainBridge[-1].address,
-        SideChainBridge.abi,
-    )
-    txid = str(token_transfer.txid).replace("0x", "")
-    bridge_transfer = side_bridge.returnTokens(
-        spender_account.address,
-        spender_account.address,
-        USDC_BRIDGED[-1].address,
-        amount_to_bridge,
-        txid,
-        5,
-        {
-            "from": spender_account,
-            "gasPrice": Web3.toWei(10, "gwei"),
-            "gasLimit": 1000000,
-        },
-    )
-    bridge_transfer.wait(1)
+#     side_bridge = Contract.from_abi(
+#         SideChainBridge._name,
+#         SideChainBridge[-1].address,
+#         SideChainBridge.abi,
+#     )
+#     txid = str(token_transfer.txid).replace("0x", "")
+#     bridge_transfer = side_bridge.returnTokens(
+#         spender_account.address,
+#         spender_account.address,
+#         USDC_BRIDGED[-1].address,
+#         amount_to_bridge,
+#         txid,
+#         5,
+#         {
+#             "from": spender_account,
+#             "gasPrice": Web3.toWei(10, "gwei"),
+#             "gasLimit": 1000000,
+#         },
+#     )
+#     bridge_transfer.wait(1)
 
 
 def show_info():
@@ -196,7 +196,7 @@ def deploy_on_mainnet():
     print(f"You are currently on {network.show_active()}")
     deploy_token_main()
     deploy_and_setup_main_bridge()
-    mint_token_main(test=False)
+    mint_token_main()
     # main_bridge_addToken() # use if you want to add more than one token
     print("deployment on mainnet done.")
 
@@ -206,12 +206,12 @@ def deploy_on_sidechain():
     deploy_and_setup_side_bridge_and_deploy_side_token()
 
 
-def interact():
-    print(f"You are currently on {network.show_active()}")
-    if network.show_active() == "goerli":
-        transfer_to_main_bridge()
-    else:
-        return_token_on_side_chain()
+# def interact():
+#     print(f"You are currently on {network.show_active()}")
+#     if network.show_active() == "goerli":
+#         transfer_to_main_bridge()
+#     else:
+#         return_token_on_side_chain()
 
 
 def main():

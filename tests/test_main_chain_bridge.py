@@ -4,7 +4,7 @@ import pytest
 
 @pytest.fixture(scope="module")
 def account():
-    return accounts.add(config["wallets"]["from_key"])
+    return accounts.add(config["wallets"]["from_key_presenter_1"])
 
 
 @pytest.fixture(scope="module")
@@ -19,7 +19,7 @@ def token_side(account):
 
 @pytest.fixture(scope="module")
 def gateway():
-    return accounts.add(config["wallets"]["from_key_2"])
+    return accounts.add(config["wallets"]["from_key_presenter_2"])
 
 
 @pytest.fixture(scope="module")
